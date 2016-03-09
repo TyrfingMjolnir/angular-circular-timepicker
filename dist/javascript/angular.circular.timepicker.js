@@ -4,19 +4,19 @@
  * License: MIT
  *
  * @author        Siddharth Audhinarayanan
- * @since        2016-Jan-31
+ * @since         2016-Jan-31
  */
- String.prototype.paddingLeft = function (paddingValue) {
-    return String(paddingValue + this).slice(-paddingValue.length);
+ String.prototype.paddingLeft = function( paddingValue ) {
+   return String( paddingValue + this ).slice( -paddingValue.length );
  };
 
-var app = angular.module('angular.circular.datetimepicker',[]);
-app.directive('circulartimepicker',[function(){
+var app = angular.module( 'angular.circular.datetimepicker', [] );
+app.directive( 'circulartimepicker', [ function() {
   return {
     restrict: 'E',
-    replace: true,
-    scope:{
-      model: '='
+    replace:  true,
+    scope:    {
+      model:  '='
     },
     template: '<div class="datetimepicker">'
             +   '<div class="datetimepicker-modal" ng-click="setState(false)" ng-if="state && config.modal"  style="background-color:{{config.backgroundColor}}"></div>'
@@ -59,103 +59,109 @@ app.directive('circulartimepicker',[function(){
             +     '</div>'
             +   '</div>'
             + '</div>',
-    link: function(scope,element,attributes){
-      scope.state = false;
-      scope.tab = 'time';
-      scope.setTab = function(tab){
-        scope.tab = tab;
+    link: function( scope, element, attributes ){
+      scope.state  = false;
+      scope.tab    = 'time';
+      scope.setTab = function( tab ) {
+        scope.tab  = tab;
       }
       scope.config = {
         modal: true,
-        color:'rgba(255,255,255,0.75)',
-        backgroundColor: 'rgba(0,0,0,0.75)'
+        color: 'rgba( 255, 255, 255, 0.75 )',
+        backgroundColor: 'rgba( 0, 0, 0, 0.75 )'
       };
-      scope.months = ["January","February","March","April","May","June","July","Augusta","September","October","November","December"];
-      scope.dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-      scope.$watch('model',function(value){
+      scope.months = [ "January", "February", "March",
+                       "April", "May", "June",
+                       "July", "Augusta", "September",
+                       "October", "November", "December" ];
+      scope.dayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+      scope.$watch( 'model', function( value ){
         var m;
-        if(value)
-          m = moment(value);
-        else
+        if( value ) {
+          m = moment( value );
+        } else {
           m = moment();
-        m = m.minute(5*Math.ceil(m.minute()/5));
-        scope.display = m.format('YYYY-MM-DD hh:mm A');
-        scope.days = scope.getDaysInMonth(m.year(),m.month());
-        scope.minute = m.minute();
-        scope.meridian = m.format('A');
-        scope.hour  = scope.meridian == 'PM' ? m.hour() - 12: m.hour();
-        if(scope.hour==0) scope.hour = 12;
-        scope.datePreview = m.format('YYYY-MM-DD');
-        scope.timePreview = m.format('hh:mm A');
-        scope.displayMonth = scope.months[m.month()];
+        }
+        m = m.minute( 5 * Math.ceil( m.minute() / 5 ) );
+        scope.display      = m.format( 'YYYY-MM-DD hh:mm A' );
+        scope.days         = scope.getDaysInMonth( m.year(), m.month() );
+        scope.minute       = m.minute();
+        scope.meridian     = m.format( 'A' );
+        scope.hour         = scope.meridian == 'PM' ? m.hour() - 12: m.hour();
+        if( scope.hour == 0 ) {
+          scope.hour = 12;
+        }
+        scope.datePreview  = m.format( 'YYYY-MM-DD' );
+        scope.timePreview  = m.format( 'hh:mm A' );
+        scope.displayMonth = scope.months[ m.month() ];
         scope.day = m.date();
       })
 
-      scope.setDay = function(date){
-        scope.model = moment(scope.model).date(date).toDate();
+      scope.setDay = function( date ) {
+        scope.model = moment( scope.model ).date( date ).toDate();
       }
 
-      scope.setState = function(state){
+      scope.setState = function( state ) {
         scope.state = false;
       }
 
-      scope.setHour = function(hour){
-        if(scope.meridian == 'PM' && hour < 12)
+      scope.setHour = function( hour ) {
+        if( scope.meridian == 'PM' && hour < 12 )
           hour = hour + 12;
-        if(scope.meridian == 'AM' && hour == 12)
+        if( scope.meridian == 'AM' && hour == 12 )
           hour = hour - 12;
-        scope.model = moment(scope.model).hour(hour).toDate();
+        scope.model = moment( scope.model ).hour( hour ).toDate();
       }
 
-      scope.setMeridian = function(meridian){
-        var m = moment(scope.model);
+      scope.setMeridian = function( meridian ) {
+        var m = moment( scope.model );
 
-        if(meridian == 'AM'){
-          if(m.hours()>=12){
-            m = m.add(-12,'hours');
+        if( meridian == 'AM' ) {
+          if( m.hours() >= 12 ) {
+            m = m.add( -12, 'hours' );
             scope.model = m.toDate();
           }
-        }else{
-          if(m.hours()<12){
-            m = m.add(12,'hours');
+        } else {
+          if( m.hours() < 12 ) {
+            m = m.add( 12, 'hours' );
             scope.model = m.toDate();
           }
         }
       }
 
-      scope.setMinutes = function(minutes){
-        scope.model = moment(scope.model).minute(minutes).toDate();
+      scope.setMinutes = function( minutes ) {
+        scope.model = moment( scope.model ).minute( minutes ).toDate();
       }
 
       var days = [];
-      for(var i=1;i<=31;i++){
-        days.push(i);
+      for( var i =1; i <= 31; i++ ) {
+        days.push( i );
       }
-      scope.getDaysInMonth = function(year,month){
-        var firstDayOfWeek = 0;
-        var firstDayOfMonth = new Date(year, month, 1),
-            lastDayOfMonth = new Date(year, month + 1, 0),
-            lastDayOfPreviousMonth = new Date(year, month, 0),
-            daysInMonth = lastDayOfMonth.getDate(),
-            daysInLastMonth = lastDayOfPreviousMonth.getDate(),
-            dayOfWeek = firstDayOfMonth.getDay(),
-            leadingDays = (dayOfWeek - firstDayOfWeek + 7) % 7 || 7,
-            trailingDays = days.slice(0, 6 * 7 - (leadingDays + daysInMonth));
-        if (trailingDays.length > 7) {
-          trailingDays = trailingDays.slice(0, trailingDays.length-7);
+      scope.getDaysInMonth = function( year, month ) {
+        var firstDayOfWeek         = 0;
+        var firstDayOfMonth        = new Date( year, month, 1 ),
+            lastDayOfMonth         = new Date( year, month + 1, 0 ),
+            lastDayOfPreviousMonth = new Date( year, month, 0 ),
+            daysInMonth            = lastDayOfMonth.getDate(),
+            daysInLastMonth        = lastDayOfPreviousMonth.getDate(),
+            dayOfWeek              = firstDayOfMonth.getDay(),
+            leadingDays            = ( dayOfWeek - firstDayOfWeek + 7 ) % 7 || 7,
+            trailingDays           = days.slice( 0, 6 * 7 - ( leadingDays + daysInMonth ) );
+        if( trailingDays.length > 7 ) {
+          trailingDays             = trailingDays.slice( 0, trailingDays.length - 7 );
         }
 
         return {
-          year: year,
-          month: month,
-          days: days.slice(0, daysInMonth),
-          leadingDays: days.slice(- leadingDays - (31 - daysInLastMonth), daysInLastMonth),
+          year:         year,
+          month:        month,
+          days:         days.slice( 0, daysInMonth ),
+          leadingDays:  days.slice( - leadingDays - ( 31 - daysInLastMonth ), daysInLastMonth ),
           trailingDays: trailingDays
         };
       }
 
-      scope.addMonth = function(increment){
-        scope.model = moment(scope.model).add(increment,'months').toDate();
+      scope.addMonth = function( increment ) {
+        scope.model = moment( scope.model ).add( increment, 'months' ).toDate();
       }
     }
   }
