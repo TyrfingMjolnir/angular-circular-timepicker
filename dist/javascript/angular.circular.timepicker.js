@@ -25,6 +25,10 @@ String.prototype.paddingLeft = function( paddingValue ) {
   return String( paddingValue + this ).slice( -paddingValue.length );
 };
 
+/**
+ * @function {app.directive( 'circulartimepicker' )}
+ * @return AngularJS HTML5 directive based on embedded template
+ */ 
 var app = angular.module( 'angular.circular.datetimepicker', [] );
 app.directive( 'circulartimepicker', [ function() {
   return {
@@ -77,6 +81,11 @@ app.directive( 'circulartimepicker', [ function() {
     link: function( scope, element, attributes ){
       scope.state  = false;
       scope.tab    = 'time';
+
+/**
+ * @param {tab}
+ * @return {scope.setTab}
+ */ 
       scope.setTab = function( tab ) {
         scope.tab  = tab;
       }
@@ -112,14 +121,26 @@ app.directive( 'circulartimepicker', [ function() {
         scope.day = m.date();
       })
 
+/**
+ * @param {date}
+ * @return {scope.setDay}
+ */ 
       scope.setDay = function( date ) {
         scope.model = moment( scope.model ).date( date ).toDate();
       }
 
+/**
+ * @param {state}
+ * @return {scope.setState}
+ */ 
       scope.setState = function( state ) {
         scope.state = false;
       }
 
+/**
+ * @param {hour}
+ * @return scope.setHour
+ */ 
       scope.setHour = function( hour ) {
         if( scope.meridian == 'PM' && hour < 12 )
           hour = hour + 12;
@@ -128,6 +149,10 @@ app.directive( 'circulartimepicker', [ function() {
         scope.model = moment( scope.model ).hour( hour ).toDate();
       }
 
+/**
+ * @param {meridian}
+ * @return scope.setMeridian
+ */ 
       scope.setMeridian = function( meridian ) {
         var m = moment( scope.model );
 
@@ -144,6 +169,10 @@ app.directive( 'circulartimepicker', [ function() {
         }
       }
 
+/**
+ * @param {minutes}
+ * @return {scope.setMinutes}
+ */ 
       scope.setMinutes = function( minutes ) {
         scope.model = moment( scope.model ).minute( minutes ).toDate();
       }
@@ -152,6 +181,11 @@ app.directive( 'circulartimepicker', [ function() {
       for( var i =1; i <= 31; i++ ) {
         days.push( i );
       }
+/**
+ * @param {year}
+ * @param {month}
+ * @return scope.getDaysInMonth
+ */ 
       scope.getDaysInMonth = function( year, month ) {
         var firstDayOfWeek         = 0;
         var firstDayOfMonth        = new Date( year, month, 1 ),
@@ -175,6 +209,10 @@ app.directive( 'circulartimepicker', [ function() {
         };
       }
 
+/**
+ * @param {increment}
+ * @return {scope.addMonth}
+ */ 
       scope.addMonth = function( increment ) {
         scope.model = moment( scope.model ).add( increment, 'months' ).toDate();
       }
