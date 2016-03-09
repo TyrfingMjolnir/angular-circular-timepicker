@@ -46,7 +46,7 @@ app.directive( 'circulartimepicker', [ function() {
             +     '</div>'
             +     '<div class="datetimepicker-section datetimepicker-date-time" ng-if="tab==\'time\'">'
             +       '<div class="time-circle-outer">'
-            +         '<div class="time-meridian time-left" ng-click="setMeridian(\'AM\')" ng-class="{\'selected\':meridian==\'AM\'}">AM</div>'
+            +         '<div class="time-meridian time-left"  ng-click="setMeridian(\'AM\')" ng-class="{\'selected\':meridian==\'AM\'}">AM</div>'
             +         '<div class="time-meridian time-right" ng-click="setMeridian(\'PM\')" ng-class="{\'selected\':meridian==\'PM\'}">PM</div>'
             +         '<div class="time-circle-center"></div>'
             +         '<div class="time-circle-hand time-circle-hand-large deg-{{minute/5}}" ></div>'
