@@ -13,16 +13,17 @@
  * @param {scope.setTab}
  * @param {scope.setDay}
  * @param {scope.setState}
- * @param {scope.setTab}
- * @param {scope.setTab}
- * @param {scope.setTab}
- * @return AngularJS HTML5
+ * @param {scope.setHour}
+ * @param {scope.setMeridian}
+ * @param {scope.setMinutes}
+ * @param {scope.getDaysInMonth}
+ * @param {scope.addMonth}
+ * @return AngularJS HTML5 template directive
  */ 
  
- 
- String.prototype.paddingLeft = function( paddingValue ) {
-   return String( paddingValue + this ).slice( -paddingValue.length );
- };
+String.prototype.paddingLeft = function( paddingValue ) {
+  return String( paddingValue + this ).slice( -paddingValue.length );
+};
 
 var app = angular.module( 'angular.circular.datetimepicker', [] );
 app.directive( 'circulartimepicker', [ function() {
