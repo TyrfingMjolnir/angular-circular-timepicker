@@ -6,8 +6,8 @@
  * @author        Siddharth Audhinarayanan
  * @since         2016-Jan-31
  * 
- * Misc the beginning of documentation below and formatting of the source itself by
- * @coauthor      Tyrfing Mjolnir
+ * Initial documentation below and formatting of the source itself by
+ * @author        Tyrfing Mjolnir
  *
  * Directive in which gives date / circular time picker
  * @param {scope.setTab}
