@@ -26,7 +26,7 @@ String.prototype.paddingLeft = function( paddingValue ) {
 };
 
 /**
- * @function {app.directive( 'circulartimepicker' )}
+ * @directive {'circulartimepicker'}
  * @return AngularJS HTML5 directive based on embedded template
  */ 
 var app = angular.module( 'angular.circular.datetimepicker', [] );
