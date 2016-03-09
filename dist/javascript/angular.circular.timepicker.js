@@ -10,6 +10,7 @@
  * @author        Tyrfing Mjolnir
  *
  * Directive in which gives date / circular time picker
+ * @directive {'circulartimepicker'}
  * @param {scope.setTab}
  * @param {scope.setDay}
  * @param {scope.setState}
