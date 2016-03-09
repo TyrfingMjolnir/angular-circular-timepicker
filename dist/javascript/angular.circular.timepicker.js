@@ -10,6 +10,12 @@
  *
  * Directive in which gives date / circular time picker
  * @param {Array.<Object>} Feedback from return
+ * @param {scope.setTab}
+ * @param {scope.setDay}
+ * @param {scope.setState}
+ * @param {scope.setTab}
+ * @param {scope.setTab}
+ * @param {scope.setTab}
  * @return AngularJS HTML5
  */ 
  
