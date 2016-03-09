@@ -9,7 +9,6 @@
  * Misc random stuff and formatting of the source itself by TyrfingMjolnir
  *
  * Directive in which gives date / circular time picker
- * @param {Array.<Object>} Feedback from return
  * @param {scope.setTab}
  * @param {scope.setDay}
  * @param {scope.setState}
@@ -18,7 +17,7 @@
  * @param {scope.setMinutes}
  * @param {scope.getDaysInMonth}
  * @param {scope.addMonth}
- * @return AngularJS HTML5 template directive
+ * @return AngularJS HTML5 directive based on embedded template
  */ 
  
 String.prototype.paddingLeft = function( paddingValue ) {
