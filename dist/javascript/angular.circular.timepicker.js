@@ -5,7 +5,15 @@
  *
  * @author        Siddharth Audhinarayanan
  * @since         2016-Jan-31
- */
+ * 
+ * Misc random stuff and formatting of the source itself by TyrfingMjolnir
+ *
+ * Directive in which gives date / circular time picker
+ * @param {Array.<Object>} Feedback from return
+ * @return AngularJS HTML5
+ */ 
+ 
+ 
  String.prototype.paddingLeft = function( paddingValue ) {
    return String( paddingValue + this ).slice( -paddingValue.length );
  };
